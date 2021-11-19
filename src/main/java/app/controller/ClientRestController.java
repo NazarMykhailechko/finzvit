@@ -45,7 +45,7 @@ public class ClientRestController {
 
         for(int x = 1; x < 6; x++){
 
-            Bal[] dto = new Gson().fromJson(new InputStreamReader(new FileInputStream("src/main/data" + x + ".json")), Bal[].class);
+            Bal[] dto = new Gson().fromJson(new InputStreamReader(new FileInputStream("src/main/data" + x + ".json"), StandardCharsets.UTF_8), Bal[].class);
             List<Bal> divsAllList = Arrays.asList(dto);
             List<Bal> temp = divsAllList.stream().filter(d -> d.getTIN().equals(data)).collect(Collectors.toList());
 
