@@ -25,9 +25,11 @@
         });*/
 
         function getbalance() {
+
             $('#companyname').text("");
             $('#balance').DataTable({
                 pageLength : 200,
+                autoWidth: false,
                 ajax : {
                     url : '${pageContext.request.contextPath}/api/clients/divsall/' + parseInt($("#okpo").val()),
                     dataSrc : ''
@@ -38,6 +40,7 @@
                 },
                 columnDefs: [
                     { targets: [4, 5], className: 'dt-body-right' },
+                    { targets: [3], className: 'dt-body-center' },
                     { targets: [0, 1], "visible": false },
                     { className: "dt-head-center", targets: [ 0, 1, 2, 3, 4, 5]}],
                 searching: false,
@@ -49,17 +52,17 @@
                 columns : [{
                     title : 'Назва юридичної особи',
                     data : 'fullname',
-                    "width": "1%"
                 },{
                     title : 'ЄДРПОУ',
                     data : 'tin',
-                    "width": "1%"
                 }, {
                     title : 'Стаття балансу',
-                    data : 'article'
+                    data : 'article',
+                    width: "65%"
                 }, {
                     title : 'Рядок',
-                    data : 'row'
+                    data : 'row',
+                    width: "5%"
                 }, {
                     title : '01.01.2021',
                     data : 'y01_01_2021',
@@ -75,7 +78,8 @@
                     color = 'black';
                 }
                 return '<span style="color:' + color + '">' + parseFloat(data).toLocaleString(undefined, {minimumFractionDigits: 1}); + '</span>'
-                }
+                },
+                    width: "15%"
                 }, {
                     title : '01.01.2020',
                     data : 'y01_01_2020',
@@ -91,7 +95,8 @@
                             color = 'black';
                         }
                         return '<span style="color:' + color + '">' + parseFloat(data).toLocaleString(undefined, {minimumFractionDigits: 1}); + '</span>'
-                    }
+                    },
+                    width: "15%"
                 }
                 ],
                 "initComplete": function(settings, json) {
@@ -104,10 +109,102 @@
                     //$('#companyname').val(data['fullname']);
                     //console.log(data['fullname']);
                     //console.log(data['nivel_puesto']);
+
                 }
             });
-
+            getprofit();
         }
+
+function getprofit() {
+
+    $('#profit').DataTable({
+        pageLength : 200,
+        autoWidth: false,
+        ajax : {
+            url : '${pageContext.request.contextPath}/api/clients/divsallprofit/' + parseInt($("#okpo").val()),
+            dataSrc : ''
+        },
+        scrollx: true,
+        fixedHeader: {
+            header: true,
+        },
+        columnDefs: [
+            { targets: [4, 5], className: 'dt-body-right' },
+            { targets: [3], className: 'dt-body-center' },
+            { targets: [0, 1], "visible": false },
+            { className: "dt-head-center", targets: [ 0, 1, 2, 3, 4, 5]}],
+        searching: false,
+        info: false,
+        paging: false,
+        select: false,
+        destroy: true,
+        ordering: false,
+        columns : [{
+            title : 'Назва юридичної особи',
+            data : 'fullname',
+        },{
+            title : 'ЄДРПОУ',
+            data : 'tin',
+        }, {
+            title : 'Стаття балансу',
+            data : 'article',
+            width: "65%"
+        }, {
+            title : 'Рядок',
+            data : 'row',
+            width: "5%"
+        }, {
+            title : '01.01.2021',
+            data : 'y01_01_2021',
+            "render": function ( data, type, row, meta ) {
+                let color = 'green';
+                if (data < 0) {
+                    color = 'red';
+                }
+                else if (data === 0) {
+                    color = 'grey';
+                }
+                else if (data > 0) {
+                    color = 'black';
+                }
+                return '<span style="color:' + color + '">' + parseFloat(data).toLocaleString(undefined, {minimumFractionDigits: 1}); + '</span>'
+            },
+            width: "15%"
+        }, {
+            title : '01.01.2020',
+            data : 'y01_01_2020',
+            "render": function ( data, type, row, meta ) {
+                let color = 'green';
+                if (data < 0) {
+                    color = 'red';
+                }
+                else if (data === 0) {
+                    color = 'grey';
+                }
+                else if (data > 0) {
+                    color = 'black';
+                }
+                return '<span style="color:' + color + '">' + parseFloat(data).toLocaleString(undefined, {minimumFractionDigits: 1}); + '</span>'
+            },
+            width: "15%"
+        }
+        ],
+        "initComplete": function(settings, json) {
+            //let column = row(0).data();
+            //console.log(document.querySelector('td').innerHTML);
+            let data = $('#profit').DataTable().row(1).data();
+            //$('#companyname').innerHTML = data['fullname'];
+            //$('#companyname').innerText = data['fullname'];
+
+            $('#companyname').text(data['fullname']);
+
+            //$('#companyname').val(data['fullname']);
+            //console.log(data['fullname']);
+            //console.log(data['nivel_puesto']);
+        }
+    });
+
+}
 
     </script>
 
@@ -299,7 +396,6 @@
         }
         .table-wrapper table {
             width:100%;
-
         }
         .table-wrapper table * {
             //background:yellow;
@@ -412,12 +508,7 @@
     <label for="tab_1"><strong>Баланс</strong></label>
 
     <input type="radio" name="inset" value="" id="tab_2">
-    <label for="tab_2"><strong>Звіт по доходах та об'ємах операцій</strong></label>
-
-    <input type="radio" name="inset" value="" id="tab_3">
-    <label for="tab_3"><strong>Неактивні рахунки</strong></label>
-
-
+    <label for="tab_2"><strong>Звіт фінансові результати</strong></label>
 
     <div id="txt_1">
         <div class="table-wrapper">
@@ -427,18 +518,11 @@
         </div>
     </div>
     <div id="txt_2">
-<%--        <div class="table-wrapper">
+        <div class="table-wrapper">
             <div class="table-scroll">
-                <table id="commisdatalist" class="compact hover" style="width: 100%"></table>
+                <table align="left" id="profit" class="compact hover" style="width: 55%"></table>
             </div>
-        </div>--%>
-    </div>
-    <div id="txt_3">
-<%--        <div class="table-wrapper">
-            <div class="table-scroll">
-                <table id="clientsinactivelist" class="compact hover" style="width: 100%"></table>
-            </div>
-        </div>--%>
+        </div>
     </div>
 
 </div>
