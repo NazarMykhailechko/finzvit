@@ -20,6 +20,7 @@ import javax.persistence.PersistenceContext;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.util.*;
@@ -47,7 +48,8 @@ public class ClientRestController {
 
 
             //BufferedReader reader = new BufferedReader(new FileReader("src/main/data" + x + ".json", StandardCharsets.UTF_8));
-            Bal[] dto = new Gson().fromJson(new BufferedReader(new FileReader("src/main/data" + x + ".json")), Bal[].class);
+            Bal[] dto = new Gson().fromJson(new BufferedReader(new FileReader("src/main/data" + x + ".json", StandardCharsets.UTF_8)), Bal[].class);
+
             //Bal[] dto = new Gson().fromJson(new InputStreamReader(new FileInputStream("src/main/data" + x + ".json"),StandardCharsets.UTF_8), Bal[].class);
             List<Bal> divsAllList = Arrays.asList(dto);
             List<Bal> temp = divsAllList.stream().filter(d -> d.getTIN().equals(data)).collect(Collectors.toList());
