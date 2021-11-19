@@ -48,15 +48,16 @@ public class ClientRestController {
 
 
             //BufferedReader reader = new BufferedReader(new FileReader("src/main/data" + x + ".json", StandardCharsets.UTF_8));
-            Bal[] dto = new Gson().fromJson(new BufferedReader(new FileReader("src/main/data" + x + ".json", StandardCharsets.UTF_8)), Bal[].class);
+            //Bal[] dto = new Gson().fromJson(new BufferedReader(new FileReader("src/main/data" + x + ".json")), Bal[].class);
 
-            //Bal[] dto = new Gson().fromJson(new InputStreamReader(new FileInputStream("src/main/data" + x + ".json"),StandardCharsets.UTF_8), Bal[].class);
+            Bal[] dto = new Gson().fromJson(new InputStreamReader(new FileInputStream("src/main/data" + x + ".json")), Bal[].class);
             List<Bal> divsAllList = Arrays.asList(dto);
             List<Bal> temp = divsAllList.stream().filter(d -> d.getTIN().equals(data)).collect(Collectors.toList());
 
             if (!temp.toString().equals("[]")) {
                 jsonElement = new JsonParser().parse(temp.toString().replace("[", "").replace("]", ""));
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
+                System.out.println(jsonObject.get("FULL_NAME").getAsString());
                 res.add(new BalDat(jsonObject.get("TIN").getAsString(),jsonObject.get("FULL_NAME").getAsString(),"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Нематеріальні активи","1000",jsonObject.get("R1000G3").getAsDouble(),jsonObject.get("R1000G4").getAsDouble()));
                 res.add(new BalDat(jsonObject.get("TIN").getAsString(),jsonObject.get("FULL_NAME").getAsString(),"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         первісна вартість","1001",jsonObject.get("R1001G3").getAsDouble(),jsonObject.get("R1001G4").getAsDouble()));
                 res.add(new BalDat(jsonObject.get("TIN").getAsString(),jsonObject.get("FULL_NAME").getAsString(),"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         накопичена амортизація","1002",jsonObject.get("R1002G3").getAsDouble(),jsonObject.get("R1002G4").getAsDouble()));
