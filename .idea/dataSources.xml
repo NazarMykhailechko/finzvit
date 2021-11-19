@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="finzvit@localhost" uuid="fdf8cac6-c2a0-40bd-bdc5-0a7e45802837">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/finzvit?serverTimezone=UTC</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="jdbc:mysql://@eu-cdbr-west-01.cleardb.com:3306/heroku_d005b45235275a5" uuid="1f6cd820-95b9-4f6e-8191-20e28ff5a0ef">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://@eu-cdbr-west-01.cleardb.com:3306/heroku_d005b45235275a5</jdbc-url>
+    </data-source>
+  </component>
+</project>
