@@ -104,7 +104,7 @@ public class CrmSystemController {
 
 
         @RequestMapping(value = "divsall/{data}", method = RequestMethod.GET, produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-        public ResponseEntity<Iterable<BalDat>> divsAll(@PathVariable String data) throws IOException {
+        public ResponseEntity<Iterable<BalDat>> divsAll(@PathVariable String data, Principal principal) throws IOException {
 
     /*        Bal[] dto = new Gson().fromJson(new InputStreamReader(new FileInputStream("src/main/data.json")), Bal[].class);
             List<Bal> divsAllList = Arrays.asList(dto);
@@ -234,6 +234,7 @@ public class CrmSystemController {
                 }
 
             }
+            System.out.println(principal.getName());
 
             try {
                 return new ResponseEntity<Iterable<BalDat>>(res, HttpStatus.OK);
