@@ -8,7 +8,7 @@
 <html>
 <head>
 
-    <title>Клієнти</title>
+    <title>Фінансова звітність</title>
 
     <meta charset="utf-8" />
 
@@ -344,6 +344,15 @@
             font-family: "Helvetica Neue", Helvetica, sans-serif;
             font-size: small;
         }
+        .fullname{
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+            color: crimson;
+            font-weight: bold;
+            font-size: smaller;
+        }
+        .enterokpo{
+            border: 1px solid crimson
+        }
 
     </style>
 </head>
@@ -378,9 +387,9 @@
         <%--        <input type="button" style="background-color: crimson;color: white" onclick="location.href='/managersreports';" value="Управлінські звіти" />--%>
         <%--<input type="button" style="background-color: crimson;color: white" onClick="window.open('/managersreports','mywindow', 'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=3000, height=3000'); return false;" value="Управлінські звіти" />--%>
         <%--<input type="button" style="background-color: crimson;color: white" onclick="location.href='/risk';" value="Кредитні заявки" />--%>
-        <input type="text" id="okpo"/>
+        <input type="text"  id="okpo"/>
         <input type="button" id="getokpo" onclick="getbalance()" style="background-color: crimson;color: white" value="Пошук фінансової звітності" /><p>
-        <div id="companyname"></div>
+        <div id="companyname" class="fullname"></div>
     </sec:authorize>
 <%--    <sec:authorize access="hasRole('ROLE_CORP')">
         &lt;%&ndash;        <input type="button" style="background-color: crimson;color: white" onclick="location.href='/managersreports';" value="Управлінські звіти" />&ndash;%&gt;
@@ -413,7 +422,7 @@
     <div id="txt_1">
         <div class="table-wrapper">
             <div class="table-scroll">
-                <table align="left" id="balance" class="compact hover" style="width: 65%"></table>
+                <table align="left" id="balance" class="compact hover" style="width: 55%"></table>
             </div>
         </div>
     </div>

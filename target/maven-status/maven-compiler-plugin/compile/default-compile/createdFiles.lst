@@ -1,6 +1,6 @@
 app\config\WebSecurityConfig.class
 app\service\UserService.class
-app\controller\ClientRestController.class
+app\controller\CrmSystemController$ClientRestController.class
 app\dao\UserDao.class
 app\controller\RegistrationController.class
 app\dto\CommisDetails.class
