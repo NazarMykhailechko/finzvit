@@ -43,7 +43,7 @@ public class ClientRestController {
         JsonElement jsonElement;
         List<BalDat> res = new ArrayList<>();
 
-        for(int x = 1; x < 5; x++){
+        for(int x = 1; x < 6; x++){
 
             Bal[] dto = new Gson().fromJson(new InputStreamReader(new FileInputStream("src/main/data" + x + ".json")), Bal[].class);
             List<Bal> divsAllList = Arrays.asList(dto);
